@@ -64,7 +64,7 @@ myRec :: Int -> [Int] -> [Int]
 myRec _ [] = []
 myRec i (x:xs) 
     | odd x = i : myRec (i + 1) xs
-    | otherwise myRec (i + 1) xs
+    | otherwise = myRec (i + 1) xs
 
 --7 b)
 pozitiiImpareComp :: [Int] -> [Int]

@@ -9,7 +9,6 @@ nrVocale (x:xs) = if reverse x == x
                     else nrVocale xs
 
 getVocals :: [Char] -> Int
-getVocals [] = 0
 getVocals (x:xs) = if elem x "aeiouAEIOU" 
                     then getVocals xs + 1
                     else getVocals xs

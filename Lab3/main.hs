@@ -75,5 +75,9 @@ pozitiiImpareComp l = [ fst i | i <- zip [0..(length l) - 1] l, even (snd i) == 
 multDigitsRec :: [Char] -> Int
 multDigitsRec [] = 1
 multDigitsRec (x:xs) 
-    | digitToInt x >= 10 = multDigitsRec xs
-    | otherwise = digitToInt x * (multDigitsRec xs)
+    | isDigit x = digitToInt x * (multDigitsRec xs)
+    | otherwise = multDigitsRec xs
+
+--8 b)
+multDigitsComp :: [Char] -> Int
+multDigitsComp s = product [ digitToInt x | x <- s, isDigit x ]

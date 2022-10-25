@@ -1,10 +1,10 @@
 -- 5
 firstEl :: [(a, b)] -> [a]
-firstEl = map (\(x, y) -> x)
+firstEl = map fst
 
 -- 6
 sumList :: [[Int]] -> [Int]
-sumList = map (\x -> sum x)
+sumList = map sum
 
 -- 7
 prel2 :: [Int] -> [Int]
@@ -12,11 +12,11 @@ prel2 = map (\x -> if even x then x `div` 2 else x * 2)
 
 -- 8
 chContain :: Char -> [String] -> [String]
-chContain ch = filter (\sir -> elem ch sir)
+chContain ch = filter (elem ch)
 
 -- 9
 oddSquare :: [Int] -> [Int]
-oddSquare l = map (\y -> y ^ 2) (filter (\x -> odd x) l)
+oddSquare l = map (^ 2) (filter odd l)
 
 -- 10
 oddPozSquare :: [Int] -> [Int]
@@ -24,12 +24,12 @@ oddPozSquare l = map (\(a, b) -> a ^ 2) (filter (\(x, y) -> odd y) (zip l [0 ..]
 
 -- 11
 numaiVocale :: [String] -> [String]
-numaiVocale l = map (\cuv -> filter (\lit -> elem lit "aeiouAEIOU") cuv) l
+numaiVocale = map (filter (`elem` "aeiouAEIOU"))
 
 -- 12
 mymap :: (a -> b) -> [a] -> [b]
 mymap _ [] = []
-mymap f (h : t) = (f h) : mymap f t
+mymap f (h : t) = f h : mymap f t
 
 myfilter :: (a -> Bool) -> [a] -> [a]
 myfilter _ [] = []

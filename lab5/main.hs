@@ -12,11 +12,17 @@ allVerifies f l
   | length (filter f l) == length l = True
   | otherwise = False
 
+allVerifiesFold :: (Int -> Bool) -> [Int] -> Bool
+allVerifiesFold f l = foldr (&&) True (foldr (\x xs -> f x : xs) [] l)
+
 -- 4
 anyVerifies :: (Int -> Bool) -> [Int] -> Bool
 anyVerifies f l
   | length (filter f l) > 0 = True
   | otherwise = False
+
+anyVerifiesFold :: (Int -> Bool) -> [Int] -> Bool
+anyVerifiesFold f l = foldr (+) 0 (foldr (\x xs -> if f x then 1 : xs else 0 : xs) [] l) > 0
 
 -- 5
 mapFoldr :: (a -> b) -> [a] -> [b]

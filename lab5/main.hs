@@ -49,4 +49,4 @@ rmCharsRec (h : t) s2 = rmCharsRec t (rmChar h s2)
 
 -- c
 rmCharsFold :: String -> String -> String
-rmCharsFold s1 = foldr (\x xs -> if x `elem` s1 then x : xs else xs) []
+rmCharsFold s1 = foldr (\x xs -> if x `elem` s1 then xs else x : xs) []

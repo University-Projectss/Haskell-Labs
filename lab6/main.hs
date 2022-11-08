@@ -94,9 +94,7 @@ doarPozN (M m) n = sum (getCateNegativePeLinii (getLiniiDeLungimeN (M m) n)) == 
 
 -- c)
 
--- getLungimiEgale :: Matrice -> Either Yes No
--- getLungimiEgale (M []) = 0
--- getLungimiEgale (M (L x : xs)) = if length x == getLungimiEgale (M xs) then  else
-
--- corect :: Matrice -> Bool
--- corect (M m) = getLungimiEgale (M m) == 1
+corect :: Matrice -> Bool
+corect (M []) = True
+corect (M (L h1 : [])) = True
+corect (M (L h1 : L h2 : t)) = length h1 == length h2 && corect (M (L h2 : t))

@@ -1,3 +1,5 @@
+import Control.Arrow (ArrowChoice (right))
+
 data Expr
   = Const Int -- integer constant
   | Expr :+: Expr -- addition
@@ -97,8 +99,21 @@ data SearchTree key value
 
 instance Collection SearchTree where
   empty = Empty
-  singleton key value = BNode Empty key (Just value) Empty
-  insert = undefined
-  toList = undefined
-  clookup = undefined
-  delete = undefined
+  singleton k value = BNode Empty k (Just value) Empty
+  insert k v Empty = singleton k v
+  insert k v (BNode leftTree key val rightTree)
+    | key < k = BNode leftTree key val (insert k v rightTree)
+    | key > k = BNode (insert k v leftTree) key val rightTree
+    | otherwise = BNode leftTree key val rightTree
+  toList Empty = []
+  toList (BNode leftTree key Nothing rightTree) = toList leftTree ++ toList rightTree
+  toList (BNode leftTree key val rightTree) = (key, case val of { Just a -> a }) : toList leftTree ++ toList rightTree
+  clookup k Empty = Nothing
+  clookup k (BNode leftTree key val rightTree)
+    | k == key = val
+    | k < key = clookup k leftTree
+    | otherwise = clookup k rightTree
+  delete k (BNode leftTree key val rightTree)
+    | k == key = BNode leftTree key Nothing rightTree
+    | k < key = delete k leftTree
+    | otherwise = delete k rightTree

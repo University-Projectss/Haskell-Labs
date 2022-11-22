@@ -80,10 +80,7 @@ newtype PairList k v = PairList {getPairList :: [(k, v)]}
 instance Collection PairList where
   empty = PairList []
   singleton key value = PairList [(key, value)]
-  insert key value (PairList l) =
-    if key `elem` map fst l
-      then insert key value (delete key (PairList l))
-      else PairList ((key, value) : l)
+  insert key value (PairList l) = insert key value (delete key (PairList l))
   toList = getPairList
   clookup key (PairList l) = Main.clookup key (PairList l)
   delete key (PairList l) = PairList $ filter (\(k, v) -> k /= key) l

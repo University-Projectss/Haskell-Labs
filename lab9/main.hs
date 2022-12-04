@@ -85,3 +85,5 @@ valida p = and [eval p env | env <- envs (variabile p)]
 -- 10
 echivalenta :: Prop -> Prop -> Bool
 echivalenta prop1 prop2 = valida (prop1 :<->: prop2)
+
+

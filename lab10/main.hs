@@ -77,4 +77,4 @@ instance Functor GoatLord where
 instance Functor TalkToMe where
   fmap f Halt = Halt
   fmap f (Print s a) = Print s (f a)
-  fmap f (Read g) = Read (fmap f g)
+  fmap f (Read g) = Read (f . g)

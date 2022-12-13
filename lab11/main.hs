@@ -8,10 +8,16 @@ instance Functor List where
   fmap f Nil = Nil
   fmap f (Cons a l) = Cons (f a) Nil
 
--- instance Applicative List where
---     pure a = Cons a Nil
---     (<*>) Nil f = Nil
---     (<*>) (Cons f l) x = Cons f Nil <*>
+myConcat :: List a -> List a -> List a
+myConcat a Nil = a
+myConcat Nil a = a
+myConcat (Cons a l) b = Cons a (myConcat l b)
+
+instance Applicative List where
+  pure a = Cons a Nil
+  f <*> Nil = Nil
+  Nil <*> f = Nil
+  Cons f fs <*> (Cons a l) = Cons (f a) (myConcat (fmap f l) (fs <*> Cons a l))
 
 -- 2
 data Cow = Cow
@@ -71,3 +77,5 @@ mkPerson n a
   | otherwise = Nothing
 
 -- d
+mkPerson2 :: String -> String -> Maybe Person
+mkPerson2 n a = Person <$> Just (Name n) <*> Just (Address a)

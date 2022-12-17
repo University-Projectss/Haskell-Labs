@@ -15,6 +15,8 @@ f x = x + 1
 g :: [ceva] -> [ceva]
 g (h1 : h2 : t) = t -- putem evidentia cate elemente vrem din capatul listei
 
-
 -- f x y = x + y
 -- f x = \y -> x + y
+
+-- fmap este echivalent in notatie cu <$>
+-- Functor == generalizare a functiei map pe orice tip de date

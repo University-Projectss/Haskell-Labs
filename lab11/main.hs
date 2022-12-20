@@ -6,7 +6,7 @@ data List a
 
 instance Functor List where
   fmap f Nil = Nil
-  fmap f (Cons a l) = Cons (f a) Nil
+  fmap f (Cons a l) = Cons (f a) (fmap f l)
 
 myConcat :: List a -> List a -> List a
 myConcat a Nil = a
@@ -79,3 +79,6 @@ mkPerson n a
 -- d
 mkPerson2 :: String -> String -> Maybe Person
 mkPerson2 n a = Person <$> Just (Name n) <*> Just (Address a)
+
+mkAddress2 :: String -> Maybe Address
+mkAddress2 adr = Address <$> adr

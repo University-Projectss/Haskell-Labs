@@ -81,4 +81,7 @@ mkPerson2 :: String -> String -> Maybe Person
 mkPerson2 n a = Person <$> Just (Name n) <*> Just (Address a)
 
 mkAddress2 :: String -> Maybe Address
-mkAddress2 adr = Address <$> adr
+mkAddress2 adr = Address <$> validateLength 101 adr
+
+mkName2 :: String -> Maybe Name
+mkName2 n = Name <$> validateLength 26 n

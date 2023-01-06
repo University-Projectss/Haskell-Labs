@@ -1,3 +1,5 @@
+import Distribution.SPDX (LicenseId (DOC))
+
 semiPare :: [Integer] -> [Integer]
 semiPare [] = []
 semiPare (h : t)
@@ -20,3 +22,23 @@ g (h1 : h2 : t) = t -- putem evidentia cate elemente vrem din capatul listei
 
 -- fmap este echivalent in notatie cu <$>
 -- Functor == generalizare a functiei map pe orice tip de date
+
+-- Citire de la tastatura
+
+ioString = do
+  str <- getLine
+  putStr str
+
+-- in str avem un string
+
+ioSpecific = do
+  var <- readLn :: IO Double -- citim explicit un anumit tip de data
+  print var
+
+-- Citire fisiere text
+
+inFILE = do
+  var <- readFile "filePath"
+  writeFile "filePath" var
+
+-- functie care afiseaza trb sa returneze ... -> IO ()

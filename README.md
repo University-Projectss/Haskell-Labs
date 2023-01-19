@@ -1,2 +1,6 @@
 # PF
-Functional programming in Haskell. 
+Functional programming in Haskell.
+
+# Notite ultimul curs
+
+Recap TOT :')

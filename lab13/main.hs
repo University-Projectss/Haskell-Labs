@@ -13,7 +13,9 @@ cartesianProduct xs ys = do
   return (x, y)
 
 prod f xs ys = do
-  return [f x y | x <- xs, y <- ys]
+  x <- xs
+  y <- ys
+  return f x y
 
 myGetLine :: IO String
 myGetLine = do

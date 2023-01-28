@@ -1,5 +1,3 @@
-import Distribution.SPDX (LicenseId (DOC))
-
 semiPare :: [Integer] -> [Integer]
 semiPare [] = []
 semiPare (h : t)
@@ -42,3 +40,24 @@ inFILE = do
   writeFile "filePath" var
 
 -- functie care afiseaza trb sa returneze ... -> IO ()
+
+-- (>>) :: Monad m => m a -> m b -> m b
+-- k >> f = k >>= \_ -> f
+
+-- a >> b >> c >> d in varianta do:
+-- do r1 <- a
+--    r2 <- b r1
+--    r3 <- c r2
+--    d r3
+
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
+
+class Main.Functor m => Applicative m where
+  pure :: a -> m a
+  (<*>) :: m (a -> b) -> m a -> m b
+
+class Main.Applicative m => Monad m where
+  (>>=) :: m a -> (a -> m b) -> m b
+  (>>) :: m a -> m b -> m b
+  return :: a -> m a

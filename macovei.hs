@@ -1,3 +1,5 @@
+import GHC.Exts.Heap (GenClosure (key))
+
 semiPare :: [Integer] -> [Integer]
 semiPare [] = []
 semiPare (h : t)
@@ -43,6 +45,13 @@ inFILE = do
 
 -- (>>) :: Monad m => m a -> m b -> m b
 -- k >> f = k >>= \_ -> f
+-- varianta do:
+-- k
+-- f
+
+-- e >>= \x -> rest varianta do:
+-- x <- e
+-- rest
 
 -- a >> b >> c >> d in varianta do:
 -- do r1 <- a
@@ -59,5 +68,27 @@ class Main.Functor m => Applicative m where
 
 class Main.Applicative m => Monad m where
   (>>=) :: m a -> (a -> m b) -> m b
-  (>>) :: m a -> m b -> m b
-  return :: a -> m a
+
+-- (>>) :: m a -> m b -> m b
+-- return :: a -> m a
+
+data Maybe' a = Just' a | Nothing'
+
+instance Main.Functor Maybe' where
+  fmap _ Nothing' = Nothing'
+  fmap f (Just' a) = Just' (f a)
+
+instance Main.Applicative Maybe' where
+  pure = Just'
+  Just' f <*> ma = Main.fmap f ma
+
+half :: Int -> Maybe' Int
+half n
+  | even n = Just' (n `div` 2)
+  | otherwise = Nothing'
+
+instance Main.Monad Maybe' where
+  (Just' a) >>= half = half a
+
+-- ma >> mb = mb
+-- return = Just'
